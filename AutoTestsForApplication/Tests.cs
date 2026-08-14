@@ -45,6 +45,21 @@ public class Tests
         
     }   
     
+    [Test]
+    public async Task Test3()
+    {
+        CreateUserRequestDTO newUser = new CreateUserRequestDTO
+        {
+            Name = "Ivan",
+            Job = "cook"
+        };
+
+        using HttpResponseMessage response = await client.PostAsJsonAsync("users", newUser);
+        string jsonGet = await response.Content.ReadAsStringAsync();
+        CreateUserResponseDTO userResponse = JsonSerializer.Deserialize<CreateUserResponseDTO>(jsonGet);
+
+    }
+    
     [OneTimeTearDown]
     public void TearDown()
     {
@@ -52,4 +67,4 @@ public class Tests
     }
 }
 
-//free_user_3HtrfRV1E2a7q2ygfpglr1qMRUV
+//free_user_3HtrfRV1E2a7q2ygfpglr1qMRUV - my token
