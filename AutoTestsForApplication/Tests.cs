@@ -61,6 +61,19 @@ public class Tests
     }
     
     [Test]
+    public async Task Test4()
+    {
+        CreateUserRequestDTO updatedUser = new CreateUserRequestDTO
+        {
+            Name = "Ivan",
+            Job = "driver"
+        };
+
+        using HttpResponseMessage response = await client.PutAsJsonAsync("users/2", updatedUser);
+        response.EnsureSuccessStatusCode();
+    }
+    
+    [Test]
     public async Task Test5()
     {
         using HttpResponseMessage response = await client.DeleteAsync("users/2");
