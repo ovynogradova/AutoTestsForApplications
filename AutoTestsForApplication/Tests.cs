@@ -60,6 +60,13 @@ public class Tests
 
     }
     
+    [Test]
+    public async Task Test5()
+    {
+        using HttpResponseMessage response = await client.DeleteAsync("users/2");
+        response.EnsureSuccessStatusCode();
+    }
+    
     [OneTimeTearDown]
     public void TearDown()
     {
