@@ -30,5 +30,11 @@ public class UsersData
         user.Data.First().ProfileDto.FullName.Should().Be("Alice Johnson");
     }
     
+    [Test]
+    public void AllIdsAreUnique()
+    {
+        var ids = user.Data.Select(u => u.Id).ToList(); 
+        ids.Should().OnlyHaveUniqueItems(); 
+    }
     
 }
