@@ -3,9 +3,7 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using System.Text.Json;
 
-
 namespace apitest;
-
 public class OrderTests
 {
     private OrderDataDTO order;
