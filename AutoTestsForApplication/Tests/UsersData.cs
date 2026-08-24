@@ -37,4 +37,11 @@ public class UsersData
         ids.Should().OnlyHaveUniqueItems(); 
     }
     
+    [Test]
+    public void HasAtLeastOnePremiumUser()
+    {
+        bool hasPremiumUser = user.Data.Any(u => u.ProfileDto.Tags.Contains("premium"));
+        hasPremiumUser.Should().BeTrue(); 
+    }
+    
 }
