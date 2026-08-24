@@ -19,9 +19,16 @@ public class UsersData
     }
 
     [Test]
-
     public void NumberOfUsers()
     {
         user.Data.Count().Should().Be(10);
     }
+    
+    [Test]
+    public void FirstUserNameAliceJohnson()
+    {
+        user.Data.First().ProfileDto.FullName.Should().Be("Alice Johnson");
+    }
+    
+    
 }
