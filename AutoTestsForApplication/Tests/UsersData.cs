@@ -43,5 +43,13 @@ public class UsersData
         bool hasPremiumUser = user.Data.Any(u => u.ProfileDto.Tags.Contains("premium"));
         hasPremiumUser.Should().BeTrue(); 
     }
+
+    [Test]
+    public void AllUsersHaveNonEmptyCity()
+    {
+        var cities = user.Data.Select(u => u.ProfileDto.AddressDto.City).ToList();
+        cities.Should().OnlyContain(city => !string.IsNullOrWhiteSpace(city));
+    }
     
 }
+
