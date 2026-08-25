@@ -72,5 +72,14 @@ public class UsersData
         hasAdminUser.Should().BeTrue(); 
     }
     
+    [Test]
+    public void AllUsersCoordinatesAreInSweden()
+    {
+        var coordinates = user.Data.Select(u => u.ProfileDto.AddressDto.Geo).ToList(); 
+        coordinates.Should().OnlyContain(geo =>
+            geo.Lat >= 55 && geo.Lat <= 60 && 
+            geo.Lng >= 11 && geo.Lng <= 20);  
+    }
+    
 }
 
