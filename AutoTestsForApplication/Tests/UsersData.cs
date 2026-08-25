@@ -81,5 +81,15 @@ public class UsersData
             geo.Lng >= 11 && geo.Lng <= 20);  
     }
     
+    [Test]
+    public void AllUsersStreetsAreValid()
+    {
+        var streets = user.Data.Select(u => u.ProfileDto.AddressDto.Street).ToList();
+        streets.Should().OnlyContain(street =>
+            street.Any(char.IsDigit) && 
+            char.IsLetter(street[0]) &&
+            !street.All(char.IsDigit));
+    }
+    
 }
 
