@@ -51,5 +51,12 @@ public class UsersData
         cities.Should().OnlyContain(city => !string.IsNullOrWhiteSpace(city));
     }
     
+    [Test]
+    public void HasAtLeastOneUserFromStockholm()
+    {
+        bool hasStockholmUser = user.Data.Any(u => u.ProfileDto.AddressDto.City == "Stockholm");
+        hasStockholmUser.Should().BeTrue();
+    }
+    
 }
 
