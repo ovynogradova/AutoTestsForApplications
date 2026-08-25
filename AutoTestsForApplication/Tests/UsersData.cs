@@ -58,5 +58,13 @@ public class UsersData
         hasStockholmUser.Should().BeTrue();
     }
     
+    [Test]
+    public void AllUsersAgeInRange()
+    {
+        var ages = user.Data.Select(u => u.ProfileDto.Age).ToList();
+        ages.Should().OnlyContain(age => age >= 18 && age <= 60); 
+    }
+    
+    
 }
 
