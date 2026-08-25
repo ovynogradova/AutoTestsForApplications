@@ -65,6 +65,12 @@ public class UsersData
         ages.Should().OnlyContain(age => age >= 18 && age <= 60); 
     }
     
+    [Test]
+    public void HasAtLeastOneAdminUser()
+    {
+        bool hasAdminUser = user.Data.Any(u => u.Roles.Contains("admin"));
+        hasAdminUser.Should().BeTrue(); 
+    }
     
 }
 
