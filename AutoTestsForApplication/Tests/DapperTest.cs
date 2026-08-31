@@ -87,4 +87,24 @@ public class DapperTest
             product.CategoryId.Should().Be(2);
         }
     }
+    
+    [Test]
+    public async Task GetOrderWithItemsByUserId()
+    {
+        var orderRepo = precondition.Provider.GetRequiredService<IOrderRepository>();
+        var order = await orderRepo.GetOrderByUserIdAsync(2);
+
+        var itemRepo = precondition.Provider.GetRequiredService<IOrderItemRepository>();
+        var items = (await itemRepo.GetItemsByOrderIdAsync(order.Id)).ToList();
+
+        using (new AssertionScope())
+        {
+            order.UserId.Should().Be(2);
+            order.TotalPrice.Should().Be(24990);
+
+            items.Should().HaveCount(1);
+            items.Single().Quantity.Should().Be(1);
+            items.Single().UnitPrice.Should().Be(24990);
+        }
+    }
 }

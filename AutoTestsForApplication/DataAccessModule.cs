@@ -12,6 +12,8 @@ public static class DataAccessModule
         services.AddScoped<IAddressRepository>(p => new AddressRepository(connectionString));
         services.AddScoped<ICategoryRepository>(p => new CategoryRepository(connectionString));
         services.AddScoped<IProductRepository>(p => new ProductRepository(connectionString));
+        services.AddScoped<IOrderRepository>(p => new OrderRepository(connectionString));
+        services.AddScoped<IOrderItemRepository>(p => new OrderItemRepository(connectionString));
         return services;
     }
 }
