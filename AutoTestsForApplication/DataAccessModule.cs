@@ -10,6 +10,7 @@ public static class DataAccessModule
     {
         services.AddScoped<IUserRepository>(p => new UserRepository(connectionString));
         services.AddScoped<IAddressRepository>(p => new AddressRepository(connectionString));
+        services.AddScoped<ICategoryRepository>(p => new CategoryRepository(connectionString));
         return services;
     }
 }
