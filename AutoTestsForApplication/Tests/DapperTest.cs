@@ -3,6 +3,7 @@ using apitest;
 using Microsoft.Data.Sqlite;
 using Dapper;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace apitest;
@@ -70,5 +71,20 @@ public class DapperTest
         categories.Should().HaveCount(6);
     }
     
-    
+    [Test]
+    public async Task GetProductById()
+    {
+        var repo = precondition.Provider.GetService<IProductRepository>();
+        var product = await repo.GetByIdAsync(4);
+
+        using (new AssertionScope())
+        {
+            product.Should().NotBeNull();
+            product.Name.Should().Be("MacBook Air M3");
+            product.Description.Should().Be("Ноутбук Apple");
+            product.Price.Should().Be(129990);
+            product.Stock.Should().Be(10);
+            product.CategoryId.Should().Be(2);
+        }
+    }
 }
