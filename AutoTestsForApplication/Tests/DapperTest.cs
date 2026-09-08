@@ -1,5 +1,6 @@
 using apitest.Interfaces.DapperInterface;
 using apitest;
+using apitest.DTO.DapperDTO;
 using Microsoft.Data.Sqlite;
 using Dapper;
 using FluentAssertions;
@@ -87,7 +88,7 @@ public class DapperTest
             product.CategoryId.Should().Be(2);
         }
     }
-    
+
     [Test]
     public async Task GetOrderWithItemsByUserId()
     {
@@ -107,4 +108,82 @@ public class DapperTest
             items.Single().UnitPrice.Should().Be(24990);
         }
     }
-}
+
+    [Test]
+        public async Task AccessoriesAreBoughtByUsersFromDifferentCities_ViaRepositories()
+        {
+            var categoryRepo = precondition.Provider.GetRequiredService<ICategoryRepository>();
+            var categories = await categoryRepo.GetAllCategoriesAsync();
+            var accessoriesId = categories.Single(c => c.Name == "Аксессуары").Id;
+
+            var productRepo = precondition.Provider.GetRequiredService<IProductRepository>();
+            var accessoryProductIds = (await productRepo.GetAllAsync())
+                .Where(p => p.CategoryId == accessoriesId)
+                .Select(p => p.Id)
+                .ToHashSet();
+
+            var orderRepo = precondition.Provider.GetRequiredService<IOrderRepository>();
+            var orders = (await orderRepo.GetAllAsync()).ToList();
+
+            var itemRepo = precondition.Provider.GetRequiredService<IOrderItemRepository>();
+            var addressRepo = precondition.Provider.GetRequiredService<IAddressRepository>();
+
+            var cities = new HashSet<string>();
+            foreach (var order in orders)
+            {
+                var items = await itemRepo.GetItemsByOrderIdAsync(order.Id);
+                if (items.Any(i => accessoryProductIds.Contains(i.ProductId)))
+                {
+                    var address = await addressRepo.GetAddressByUserId(order.UserId);
+                    cities.Add(address.City);
+                }
+            }
+
+            cities.Should().HaveCountGreaterThan(1);
+        }
+    [Test]
+    public async Task TvBuyersAlsoBuyAccessories()
+    {
+        var categoryRepo = precondition.Provider.GetRequiredService<ICategoryRepository>();
+        var categories = (await categoryRepo.GetAllCategoriesAsync()).ToList();
+        var tvCategoryId = categories.Single(c => c.Name == "Телевизоры").Id;
+        var accessoriesCategoryId = categories.Single(c => c.Name == "Аксессуары").Id;
+
+        var productRepo = precondition.Provider.GetRequiredService<IProductRepository>();
+        var products = (await productRepo.GetAllAsync()).ToList();
+        var tvProductIds = products.Where(p => p.CategoryId == tvCategoryId).Select(p => p.Id).ToHashSet();
+        var accessoryProductIds = products.Where(p => p.CategoryId == accessoriesCategoryId).Select(p => p.Id).ToHashSet();
+
+        var orderRepo = precondition.Provider.GetRequiredService<IOrderRepository>();
+        var orders = (await orderRepo.GetAllAsync()).ToList();
+
+        var itemRepo = precondition.Provider.GetRequiredService<IOrderItemRepository>();
+        var itemsByOrderId = new Dictionary<int, List<OrderItemDTO>>();
+        foreach (var order in orders)
+        {
+            itemsByOrderId[order.Id] = (await itemRepo.GetItemsByOrderIdAsync(order.Id)).ToList();
+        }
+
+        var tvBuyerUserIds = orders
+            .Where(o => itemsByOrderId[o.Id].Any(i => tvProductIds.Contains(i.ProductId)))
+            .Select(o => o.UserId)
+            .Distinct()
+            .ToList();
+
+        tvBuyerUserIds.Should().NotBeEmpty();
+
+        using (new AssertionScope())
+        {
+            foreach (var userId in tvBuyerUserIds)
+            {
+                var boughtAccessories = orders
+                    .Where(o => o.UserId == userId)
+                    .Any(o => itemsByOrderId[o.Id].Any(i => accessoryProductIds.Contains(i.ProductId)));
+
+                boughtAccessories.Should()
+                    .BeTrue($"пользователь {userId} купил телевизор, ожидаем, что он покупал и аксессуары");
+            }
+        }
+    }
+        
+    }
