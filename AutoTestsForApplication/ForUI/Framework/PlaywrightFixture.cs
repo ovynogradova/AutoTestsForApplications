@@ -13,7 +13,7 @@ public class PlaywrightFixture : IAsyncDisposable
         Browser = await Playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
         {
             Headless = false,
-            SlowMo = 2000,
+            SlowMo = 3000,
             Args = new[] { "--start-maximized" }
         });
     }
