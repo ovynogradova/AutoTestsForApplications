@@ -15,7 +15,7 @@ public class HerokuTests : BaseTest
         await passwordInput.FillAsync("secret_sauce");
         var loginButton = Page.Locator("//input[@id='login-button']");
         await loginButton.ClickAsync();
-        var checkMessage = Page.Locator("//*[@id='header_container']/div[2]/span");
+        var checkMessage = Page.Locator("//span[text()='Products']");
         var state = await checkMessage.IsVisibleAsync();
         state.Should().BeTrue();
 
