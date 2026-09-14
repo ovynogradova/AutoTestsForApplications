@@ -2,11 +2,14 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=217de7dc_002D3583_002D4879_002Db5b6_002D51f08c309131/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;AutoTestsForApplication&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\Ola\RiderProjects\AutoTestsForApplications\AutoTestsForApplication" Presentation="&amp;lt;AutoTestsForApplication&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ba8586b1_002D497b_002D4155_002D85c1_002Dc0f29715348a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;AutoTestsForApplication&amp;gt; #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ba8586b1_002D497b_002D4155_002D85c1_002Dc0f29715348a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;AutoTestsForApplication&amp;gt; #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\Ola\RiderProjects\AutoTestsForApplications\AutoTestsForApplication" Presentation="&amp;lt;AutoTestsForApplication&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c0678636_002D3f6f_002D4a5c_002D9421_002Df8fb97c6023d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAllCategories" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c0678636_002D3f6f_002D4a5c_002D9421_002Df8fb97c6023d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetAllCategories" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F81969AD-237B-4F92-A55C-B065F40F8894::net10.0::apitest.DapperTest.GetAllCategories&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F81969AD-237B-4F92-A55C-B065F40F8894::net10.0::apitest.UITests.HerokuTests.CheckBoxTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F81969AD-237B-4F92-A55C-B065F40F8894::net10.0::apitest.UITests.HerokuTests.FormAuthentication&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F81969AD-237B-4F92-A55C-B065F40F8894::net10.0::apitest.UITests.HerokuTests.SuccessLogin&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
