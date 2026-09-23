@@ -19,7 +19,7 @@ public class BaseTest
     {
         Page = await Fixture.Browser.NewPageAsync(new BrowserNewPageOptions
         {
-            ViewportSize = null
+            ViewportSize = ViewportSize.NoViewport
         });
     }
 
