@@ -7,8 +7,8 @@ namespace apitest.UITests;
 public class SaucedemoTests: BaseTest
 
 {
-    [Test]
-    public async Task SuccessLoginOld()
+    //[Test]
+    /*public async Task SuccessLoginOld()
     {
         await Page.GotoAsync("https://www.saucedemo.com/");
         var loginInput = Page.Locator("//input[@id='user-name']");
@@ -21,18 +21,30 @@ public class SaucedemoTests: BaseTest
         var state = await checkMessage.IsVisibleAsync();
         state.Should().BeTrue();
         await Assertions.Expect(checkMessage).ToBeVisibleAsync();
-    }
+    }*/
     
     [Test]
-    public async Task SuccessLoginPOM()
+    public async Task SuccessLoginPom()
     {
         var loginPage = new LoginPage(Page);
         await loginPage.OpenLoginPageAsync();
         await loginPage.FillLoginFormAsync("standard_user", "secret_sauce");
         
+        var expectedItems = new[] { "Sauce Labs Fleece Jacket", "Sauce Labs Bolt T-Shirt" };
+
         var productsPage = new ProductsPage(Page);
-        var checkTextAfterLogin = await productsPage.GetCheckTextAfterLoginAsync();
-        checkTextAfterLogin.Should().Contain("Products");
+        foreach (var item in expectedItems)
+        {
+            await productsPage.AddToCartAsync(item);
+        }
+        await productsPage.GoToCartAsync();
+
+        var cartPage = new CartPage(Page);
+        var cartItems = await cartPage.GetCartItemNamesAsync();
+        cartItems.Should().BeEquivalentTo(expectedItems);
+
+        await cartPage.ClickCheckoutAsync();
+
        
     }
 
