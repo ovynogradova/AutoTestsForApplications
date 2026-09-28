@@ -24,7 +24,7 @@ public class SaucedemoTests: BaseTest
     }*/
     
     [Test]
-    public async Task SuccessLoginPom()
+    public async Task FullScenario()
     {
         var loginPage = new LoginPage(Page);
         await loginPage.OpenLoginPageAsync();
@@ -44,10 +44,19 @@ public class SaucedemoTests: BaseTest
         cartItems.Should().BeEquivalentTo(expectedItems);
 
         await cartPage.ClickCheckoutAsync();
+      
+        var checkoutPage = new CheckoutPage(Page);
+        await checkoutPage.FillCheckoutFormAsync("John", "Smith", "12345");
 
-       
+        var checkoutOverviewPage = new CheckoutOverviewPage(Page);
+        var overviewItems = await checkoutOverviewPage.GetCartItemNamesAsync();
+        overviewItems.Should().BeEquivalentTo(expectedItems);
+
+        await checkoutOverviewPage.ClickFinishAsync();
+
+        var checkoutCompletePage = new CheckoutCompletePage(Page);
+        var completeMessage = await checkoutCompletePage.GetCompleteMessageAsync();
+        completeMessage.Should().Contain("Thank you for your order!");
     }
-
-    
     
 }

@@ -17,5 +17,6 @@
     &lt;TestId&gt;NUnit3x::F81969AD-237B-4F92-A55C-B065F40F8894::net10.0::apitest.UITests.HerokuTests.AddRemoveElements&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F81969AD-237B-4F92-A55C-B065F40F8894::net10.0::apitest.UITests.SaucedemoTests.SuccessLoginPOM&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F81969AD-237B-4F92-A55C-B065F40F8894::net10.0::apitest.UITests.SaucedemoTests.SuccessLoginPom&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F81969AD-237B-4F92-A55C-B065F40F8894::net10.0::apitest.UITests.SaucedemoTests.FullScenario&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
